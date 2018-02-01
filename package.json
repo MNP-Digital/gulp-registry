@@ -1,10 +1,13 @@
 {
-  "name": "@technology4growth/gulp-registry",
+  "name": "@t4gltd/gulp-registry",
   "version": "0.0.1",
   "description": "Registry of common Gulp tasks used in Front End projects at T4G.",
   "main": "index.js",
   "author": "T4G",
   "license": "MIT",
+  "keywords": [
+    "gulp"
+  ],
   "dependencies": {
     "chalk": "^2.3.0",
     "del": "^3.0.0",
