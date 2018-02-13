@@ -66,6 +66,10 @@ The root directory of the generated assets, and the root directory of the static
 
 The port on which to to serve the static HTTP server. (default: 9001)
 
+## Code of Conduct
+
+Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms.
+
 ## License
 
 This project is available under the MIT license. See the LICENSE file for more info.
