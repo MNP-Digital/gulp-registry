@@ -25,11 +25,8 @@ CommonRegistry.prototype.init = function(taker) {
   var port = this.config.port;
   var buildDir = this.config.buildDir;
 
-  taker.task("clean", function(cb) {
-    del.bind(null, [buildDir], {
-      dot: true
-    });
-    cb();
+  taker.task("clean", function() {
+    return del(buildDir);
   });
 
   taker.task("serve", function(cb) {
