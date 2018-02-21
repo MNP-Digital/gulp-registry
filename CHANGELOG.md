@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.1.2] - 2018-02-21
+### Added
+- Markdown extension to Changelog
+
+### Changed
+- Added links in Changelog
+
 ## [0.1.1] - 2018-02-13
 ### Added
 - Code of Conduct
@@ -17,10 +24,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - EditorConfig file
 
 ### Changed
-- Name of npm organization (now @t4gltd)
+- Name of npm organization (now [@t4gltd](https://www.npmjs.com/org/t4gltd))
 - README updates
 
-## 0.0.1 - 2018-01-09
+## [0.0.1] - 2018-01-09
 ### Added
 - Initial README
 - "clean" task
