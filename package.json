@@ -5,6 +5,10 @@
   "keywords": [
     "gulp"
   ],
+  "bugs": {
+    "url": "https://github.com/T4GLTD/gulp-registry/issues"
+  },
+  "homepage": "https://github.com/T4GLTD/gulp-registry#readme",
   "license": "MIT",
   "author": "T4G",
   "main": "index.js",

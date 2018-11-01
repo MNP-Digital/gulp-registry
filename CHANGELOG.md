@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
-- "repository" property to package.json
+- "repository", "homepage", "bugs" properties to package.json
 
 ### Changed
 - package.json property sorting (thanks to [sort-package-json](https://www.npmjs.com/package/sort-package-json))
