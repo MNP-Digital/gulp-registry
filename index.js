@@ -1,40 +1,35 @@
-var fs = require("fs");
-var http = require("http");
-var util = require("util");
+const util = require("util");
+const logger = require("fancy-log");
+const chalk = require("chalk");
 
-var del = require("del");
-var logger = require("fancy-log");
-var chalk = require("chalk");
-var ecstatic = require("ecstatic");
-var DefaultRegistry = require("undertaker-registry");
+const DefaultRegistry = require("undertaker-registry");
 
-function CommonRegistry(opts) {
+const tasks = require("require-directory")(module, "./tasks");
+
+function CommonRegistry(opts = {}) {
   DefaultRegistry.call(this);
 
-  opts = opts || {};
-
-  this.config = {
-    port: opts.port || 9001,
-    buildDir: opts.buildDir || "./dist"
+  this.defaults = {
+    port: 9001,
+    buildDir: "./dist",
+    deploy: {
+      destinationPath: "",
+      sources: []
+    }
   };
+
+  this.config = Object.assign({}, this.defaults, opts);
 }
 
 util.inherits(CommonRegistry, DefaultRegistry);
 
 CommonRegistry.prototype.init = function(taker) {
-  var port = this.config.port;
-  var buildDir = this.config.buildDir;
+  logger(`Using ${chalk.blue(`T4G Gulp Registry`)}! Available tasks:`);
 
-  taker.task("clean", function() {
-    return del(buildDir);
-  });
-
-  taker.task("serve", function(cb) {
-    http.createServer(ecstatic({ root: buildDir })).listen(port, function() {
-      logger(chalk.green("⇒ Server started at http://localhost:" + port));
-      cb();
-    });
-  });
+  for (let t in tasks) {
+    logger(chalk.green(`- ${t}`));
+    taker.task(t, tasks[t].bind(this));
+  }
 };
 
 module.exports = CommonRegistry;
