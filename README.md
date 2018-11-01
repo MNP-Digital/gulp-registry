@@ -28,20 +28,41 @@ var TaskRegistry = require("@t4gltd/gulp-registry");
 // Tell gulp about our registry, pass options (defaults shown below)
 gulp.registry(new TaskRegistry({
   buildDir: "./dist",
-  port: 9001
+  port: 9001,
+  deploy: {
+    destinationPath: "",
+    sources: []
+  }
 }));
 
-// `clean` and `serve` tasks are now available to you!
+// `clean`, `serve`, and `deploy` tasks are now available to you!
 
 // e.g. Define `css`, `images`, and `html` functions
 // ...
 
 gulp.task(
   "build",
+  gulp.parallel(
+    css,
+    images,
+    html
+  )
+);
+
+gulp.task(
+  "default",
   gulp.series(
     "clean",
-    gulp.parallel(css, images, html),
+    "build",
     "serve"
+  )
+);
+
+gulp.task(
+  "deploy",
+  gulp.series(
+    "build",
+    "deploy"
   )
 );
 ```
@@ -56,6 +77,10 @@ Clean (empty) the directory defined by the `buildDir` option.
 
 Start a static HTTP server and serve the `buildDir` on the specified `port`.
 
+`deploy`
+
+After a build is complete, move certain files (based on provided glob patterns) to another location.
+
 ## Options
 
 `buildDir`
@@ -66,10 +91,21 @@ The root directory of the generated assets, and the root directory of the static
 
 The port on which to to serve the static HTTP server. (default: 9001)
 
+`deploy`
+
+A configuration option consisting of two properties:
+
+- `destinationPath` - the path to the backend solution relative to your project root
+- `sources` - an array of objects, each consisting of a `source` (glob pattern) and `destination` (directory joined onto the end of `destinationPath`)
+
 ## Code of Conduct
 
-Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms.
+Please note that this project is released with a [Contributor Code of Conduct][cc]. By participating in this project you agree to abide by its terms.
+
+[cc]: https://github.com/T4GLTD/gulp-registry/blob/master/CODE_OF_CONDUCT.md
 
 ## License
 
-This project is available under the MIT license. See the LICENSE file for more info.
+This project is available under the MIT license. See the [LICENSE] file for more info.
+
+[LICENSE]: https://github.com/T4GLTD/gulp-registry/blob/master/LICENSE.md
