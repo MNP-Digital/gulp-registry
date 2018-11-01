@@ -1,6 +1,6 @@
 {
   "name": "@t4gltd/gulp-registry",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Registry of common Gulp tasks used in Front End projects at T4G.",
   "keywords": [
     "gulp"
