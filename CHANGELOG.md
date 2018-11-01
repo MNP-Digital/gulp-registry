@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 - package.json property sorting (thanks to [sort-package-json](https://www.npmjs.com/package/sort-package-json))
+- Update link to `registry()` docs found in the official Gulp repository
 
 ## [0.1.3] - 2018-02-21
 ### Fixed

@@ -15,7 +15,7 @@
   </a>
 </p>
 
-Common Gulp tasks, to be added via the `registry()` method in the Gulp 4 API. ([See the docs](https://github.com/gulpjs/gulp/blob/4.0/docs/API.md#gulpregistryregistry))
+Common Gulp tasks, to be added via the `registry()` method in the Gulp 4 API. ([See the docs](https://github.com/gulpjs/gulp/blob/master/docs/api/registry.md))
 
 ## Usage
 
