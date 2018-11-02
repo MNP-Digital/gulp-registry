@@ -4,7 +4,10 @@ const chalk = require("chalk");
 
 const DefaultRegistry = require("undertaker-registry");
 
-const tasks = require("require-directory")(module, "./tasks");
+const requireDirectory = require("require-directory");
+const tasks = requireDirectory(module, "./tasks");
+const configs = requireDirectory(module, "./configs");
+const utils = requireDirectory(module, "./utils");
 
 function CommonRegistry(opts = {}) {
   DefaultRegistry.call(this);
@@ -18,7 +21,9 @@ function CommonRegistry(opts = {}) {
     }
   };
 
-  this.config = Object.assign({}, this.defaults, opts);
+  this.config = Object.assign({}, this.defaults, configs, opts);
+
+  this.utils = utils;
 }
 
 util.inherits(CommonRegistry, DefaultRegistry);
@@ -30,6 +35,8 @@ CommonRegistry.prototype.init = function(taker) {
     logger(chalk.green(`- ${t}`));
     taker.task(t, tasks[t].bind(this));
   }
+
+  return this;
 };
 
 module.exports = CommonRegistry;

@@ -15,56 +15,49 @@
   </a>
 </p>
 
-Common Gulp tasks, to be added via the `registry()` method in the Gulp 4 API. ([See the docs](https://github.com/gulpjs/gulp/blob/master/docs/api/registry.md))
+We use this custom Gulp registry for some of our front-end development efforts at [T4G].
 
-## Usage
+## What does this do?
+
+From the [official Gulp docs](https://github.com/gulpjs/gulp/blob/master/docs/api/registry.md), a registry "can provide shared tasks or augmented functionality". This means your project's gulpfile can be small; repeated tasks and configurations that are common between projects can be maintained centrally.
+
+You can [read more about Custom Registries](https://github.com/gulpjs/undertaker-registry#custom-registries) in the docs for `undertaker-registry`, the default registry that Gulp 4 uses internally.
+
+[t4g]: https://www.t4g.com
+
+## Example usage
 
 ```js
 // Require your other modules
 // ...
 
-var TaskRegistry = require("@t4gltd/gulp-registry");
+// Some custom configuration
+let config = {
+  env: process.env.NODE_ENV
+};
 
-// Tell gulp about our registry, pass options (defaults shown below)
-gulp.registry(new TaskRegistry({
-  buildDir: "./dist",
-  port: 9001,
-  deploy: {
-    destinationPath: "",
-    sources: []
-  }
-}));
+// Import your registry prototype
+const taskReg = require("@t4gltd/gulp-registry");
+// Create an instance of your registry
+const registry = new taskReg(config);
+// Attach your custom registry
+gulp.registry(registry);
+// The registry will return its own config object.
+// You can re-use this augmented config object in other tasks below.
+//   config = registry.config;
 
-// `clean`, `serve`, and `deploy` tasks are now available to you!
+// You also have access to some utility functions.
+//   utils = registry.utils
 
-// e.g. Define `css`, `images`, and `html` functions
-// ...
+// You can now refer to the tasks provided by the registry!
 
-gulp.task(
-  "build",
-  gulp.parallel(
-    css,
-    images,
-    html
-  )
-);
+// e.g. Define your own tasks, e.g. css, images, html
 
-gulp.task(
-  "default",
-  gulp.series(
-    "clean",
-    "build",
-    "serve"
-  )
-);
+gulp.task("build", gulp.parallel(css, images, html));
 
-gulp.task(
-  "deploy",
-  gulp.series(
-    "build",
-    "deploy"
-  )
-);
+gulp.task("default", gulp.series("clean", "build", "serve"));
+
+gulp.task("deploy", gulp.series("build", "deploy"));
 ```
 
 ## Tasks
@@ -98,6 +91,35 @@ A configuration option consisting of two properties:
 - `destinationPath` - the path to the backend solution relative to your project root
 - `sources` - an array of objects, each consisting of a `source` (glob pattern) and `destination` (directory joined onto the end of `destinationPath`)
 
+## Utility functions
+
+Some useful utility functions are availble on the `utils` property of the registry prototype.
+
+`collectImports({ target, sourceDir, format })`
+
+Recursively search a `sourceDir` directory for files, write each result as a new line to a `target` file, in the given `format`. The `{}` in the `format` string will be replaced with the relative path to each file found in `sourceDir`, relative to `target`. The extension of `target` will dictate which files to accept
+
+```js
+registry.utils.collectImports({
+  target: `./src/css/imports/_components.scss`,
+  sourceDir: `./src/components/`,
+  format: `@import "{}";`
+});
+```
+
+## Configuration objects
+
+Some recommended configuration is included that doesn't usually change between projects. Each configuration object is stored in its own file and is collected by `require-directory`, returned in the same hierarchy as the directories in `/configs`:
+
+```js
+function sass() {
+  return gulp.src(`./src/css/main.scss`)
+    // Config object exported from /configs/plumber/sass.js
+    .pipe($.plumber(registry.config.plumber.sass))
+    .pipe(gulp.dest(`./dist/css`))
+}
+```
+
 ## Code of Conduct
 
 Please note that this project is released with a [Contributor Code of Conduct][cc]. By participating in this project you agree to abide by its terms.
@@ -108,4 +130,4 @@ Please note that this project is released with a [Contributor Code of Conduct][c
 
 This project is available under the MIT license. See the [LICENSE] file for more info.
 
-[LICENSE]: https://github.com/T4GLTD/gulp-registry/blob/master/LICENSE.md
+[license]: https://github.com/T4GLTD/gulp-registry/blob/master/LICENSE.md
