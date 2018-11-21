@@ -116,9 +116,13 @@ function sass() {
   return gulp.src(`./src/css/main.scss`)
     // Config object exported from /configs/plumber/sass.js
     .pipe($.plumber(registry.config.plumber.sass))
+    // Config function exported from /configs/postcss.js
+    .pipe($.postcss(registry.config.postcss(minify)))
     .pipe(gulp.dest(`./dist/css`))
 }
 ```
+
+Note: The PostCSS configuration is exported as a function that takes a `minify` boolean as its only parameter, and that function returns the configuration object.
 
 ## Code of Conduct
 
