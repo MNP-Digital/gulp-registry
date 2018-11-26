@@ -6,12 +6,20 @@ const reporter = require("postcss-reporter");
 
 module.exports = function(minify = true) {
   const processors = [
-    autoprefixer,
-    postcssImport,
     stylelint({
-      config: require("stylelint-config-recommended")
+      config: require("stylelint-config-recommended"),
+      rules: {
+        "font-family-no-missing-generic-family-keyword": null,
+        "no-descending-specificity": null,
+        "no-duplicate-selectors": null,
+        "no-empty-source": null
+      }
     }),
-    reporter({ clearAllMessages: true })
+    postcssImport,
+    autoprefixer,
+    reporter({
+      clearAllMessages: true
+    })
   ];
 
   if (minify) {

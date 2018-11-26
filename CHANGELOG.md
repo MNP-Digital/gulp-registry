@@ -4,13 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2018-11-26
+### Removed
+- Certain rules from `stylelint-config-recommended` which were not useful when analyzing a bundle including vendor styles
+
+### Changed
+- Order of PostCSS plugins
+- Incorrect heading level for an item in CHANGELOG
+
 ## [0.4.0] - 2018-11-21
 ### Added
 - `stylelint` PostCSS plugin using `stylelint-config-recommended` configuration
 - `postcss-reporter` PostCSS plugin for better error output from other plugins
 - Note in README about PostCSS config file exporting a function instead of plain object
 
-# Removed
+### Removed
 - Redundant header text in CHANGELOG
 
 ## [0.3.0] - 2018-11-02
