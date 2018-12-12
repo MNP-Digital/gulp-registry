@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.5.1] - 2018-12-12
+### Changed
+- Fix `path` methods in `collectImports` utility function to work reliably in Windows environments
+
 ## [0.5.0] - 2018-11-26
 ### Removed
 - Certain rules from `stylelint-config-recommended` which were not useful when analyzing a bundle including vendor styles

@@ -17,8 +17,8 @@ module.exports = function(o) {
     .filter(file => path.extname(file) === ext)
     .filter(o.filterFn)
     .forEach(file => {
-      let importPath = path.join(
-        path.relative(path.dirname(o.target), o.sourceDir),
+      let importPath = path.posix.join(
+        path.posix.relative(path.dirname(o.target), o.sourceDir),
         file.replace(ext, "")
       );
       fs.appendFileSync(o.target, format(`${o.format}\n`, importPath));
