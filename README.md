@@ -117,12 +117,30 @@ function sass() {
     // Config object exported from /configs/plumber/sass.js
     .pipe($.plumber(registry.config.plumber.sass))
     // Config function exported from /configs/postcss.js
-    .pipe($.postcss(registry.config.postcss(minify)))
+    .pipe($.postcss(registry.config.postcss(minify, {
+      autoprefixer: { grid: "no-autoplace" }
+    })))
     .pipe(gulp.dest(`./dist/css`))
 }
 ```
 
-Note: The PostCSS configuration is exported as a function that takes a `minify` boolean as its only parameter, and that function returns the configuration object.
+### PostCSS configuration
+
+The PostCSS configuration is exported as a function - `registry.config.postcss()` in the example above. It takes a `minify` argument (default: `true`) and an optional `options` argument (to override our opinionated PostCSS plugin defaults), and returns the configuration object.
+
+You can pass an `options` oobject as the second argument of the `postcss` configuration function in the format below, with property names matching processor names (hyphenated package names converted to pascalCase):
+
+```js
+{
+  stylelint: {},
+  postcssImport: {},
+  autoprefixer: {},
+  postcssReporter: {},
+  cssnano: {}
+}
+```
+
+In the `sass` gulp task above, we are passing a `{ grid: "no-autoplace" }` options object to the `autoprefixer` processor.
 
 ## Code of Conduct
 

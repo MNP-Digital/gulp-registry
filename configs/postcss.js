@@ -2,23 +2,30 @@ const autoprefixer = require("autoprefixer");
 const cssnano = require("cssnano");
 const postcssImport = require("postcss-import");
 const stylelint = require("stylelint");
-const reporter = require("postcss-reporter");
+const postcssReporter = require("postcss-reporter");
 
-module.exports = function(minify = true) {
+module.exports = function(minify = true, options = {}) {
   const processors = [
     stylelint({
       config: require("stylelint-config-recommended"),
+      ...options.stylelint,
       rules: {
         "font-family-no-missing-generic-family-keyword": null,
         "no-descending-specificity": null,
         "no-duplicate-selectors": null,
-        "no-empty-source": null
+        "no-empty-source": null,
+        ...options.stylelint.rules
       }
     }),
-    postcssImport,
-    autoprefixer,
-    reporter({
-      clearAllMessages: true
+    postcssImport({
+      ...options.postcssImport
+    }),
+    autoprefixer({
+      ...options.autoprefixer
+    }),
+    postcssReporter({
+      clearAllMessages: true,
+      ...options.reporter
     })
   ];
 
@@ -28,7 +35,8 @@ module.exports = function(minify = true) {
         safe: true,
         mergeLonghand: false,
         mergeRules: false,
-        zIndex: false
+        zIndex: false,
+        ...options.cssnano
       })
     );
   }
