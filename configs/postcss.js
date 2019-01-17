@@ -14,7 +14,7 @@ module.exports = function(minify = true, options = {}) {
         "no-descending-specificity": null,
         "no-duplicate-selectors": null,
         "no-empty-source": null,
-        ...options.stylelint.rules
+        ...(options.stylelint && options.stylelint.rules)
       }
     }),
     postcssImport({
