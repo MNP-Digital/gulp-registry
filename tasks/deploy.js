@@ -2,9 +2,11 @@ const path = require("path");
 const gulp = require("gulp");
 const merge = require("merge-stream");
 
-module.exports = function(done) {
-  this.config.deploy.sources.forEach((v, k) => {
-    merge().add(
+module.exports = function() {
+  let merged = merge();
+
+  this.config.deploy.sources.forEach(v => {
+    merged.add(
       gulp
         .src(v.source)
         .pipe(
@@ -15,5 +17,5 @@ module.exports = function(done) {
     );
   });
 
-  done();
+  return merged;
 };
