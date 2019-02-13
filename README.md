@@ -95,15 +95,16 @@ A configuration option consisting of two properties:
 
 Some useful utility functions are availble on the `utils` property of the registry prototype.
 
-`collectImports({ target, sourceDir, format })`
+`collectImports({ target, sourceDir, format, [filterFn] })`
 
-Recursively search a `sourceDir` directory for files, write each result as a new line to a `target` file, in the given `format`. The `{}` in the `format` string will be replaced with the relative path to each file found in `sourceDir`, relative to `target`. The extension of `target` will dictate which files to accept
+Recursively search a `sourceDir` directory for files, and write each result as a new line to a `target` file, in the given string `format`. The `{}` in the `format` string will be replaced with the path to each file found in `sourceDir`, relative to `target`. Only files with the same extension as `target` will be included. You can optionally supply a further filtering function with the `filterFn` option.
 
 ```js
 registry.utils.collectImports({
   target: `./src/css/imports/_components.scss`,
   sourceDir: `./src/components/`,
-  format: `@import "{}";`
+  format: `@import "{}";`,
+  filterFn: file => true
 });
 ```
 
@@ -128,7 +129,7 @@ function sass() {
 
 The PostCSS configuration is exported as a function - `registry.config.postcss()` in the example above. It takes a `minify` argument (default: `true`) and an optional `options` argument (to override our opinionated PostCSS plugin defaults), and returns the configuration object.
 
-You can pass an `options` oobject as the second argument of the `postcss` configuration function in the format below, with property names matching processor names (hyphenated package names converted to pascalCase):
+You can pass an `options` object as the second argument of the `postcss` configuration function in the format below, with property names matching processor names (hyphenated package names converted to pascalCase):
 
 ```js
 {
