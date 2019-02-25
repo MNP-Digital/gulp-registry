@@ -15,7 +15,7 @@
   </a>
 </p>
 
-We use this custom Gulp registry for some of our front-end development efforts at [T4G].
+We use this custom Gulp registry for some of our front-end development efforts at [T4G](https://www.t4g.com).
 
 ## What does this do?
 
@@ -23,24 +23,37 @@ From the [official Gulp docs](https://github.com/gulpjs/gulp/blob/master/docs/ap
 
 You can [read more about Custom Registries](https://github.com/gulpjs/undertaker-registry#custom-registries) in the docs for `undertaker-registry`, the default registry that Gulp 4 uses internally.
 
-[t4g]: https://www.t4g.com
-
 ## Example usage
 
 ```js
-// Require your other modules
+// Require your dependencies
 // ...
 
-// Some custom configuration
+// Basic configuration
+
+// Hint: You can fetch config properties from external sources,
+//       and depending on environment (development/production)
 let config = {
-  env: process.env.NODE_ENV
+  deploy: {
+    destinationPath: "../backend-project/theme/assets",
+    sources: [
+      {
+        source: "dist/js/app.js",
+        destination: "js"
+      },
+      {
+        source: "dist/css/**",
+        destination: "css"
+      }
+    ]
+  }
 };
 
 // Import your registry prototype
 const taskReg = require("@t4gltd/gulp-registry");
 // Create an instance of your registry
 const registry = new taskReg(config);
-// Attach your custom registry
+// Attach your custom registry to the current `gulp` instance
 gulp.registry(registry);
 // The registry will return its own config object.
 // You can re-use this augmented config object in other tasks below.
@@ -53,9 +66,9 @@ gulp.registry(registry);
 
 // e.g. Define your own tasks, e.g. css, images, html
 
-gulp.task("build", gulp.parallel(css, images, html));
+gulp.task("build", gulp.series("clean", gulp.parallel(css, images, html)));
 
-gulp.task("default", gulp.series("clean", "build", "serve"));
+gulp.task("default", gulp.series("build", "serve"));
 
 gulp.task("deploy", gulp.series("build", "deploy"));
 ```
@@ -66,23 +79,19 @@ gulp.task("deploy", gulp.series("build", "deploy"));
 
 Clean (empty) the directory defined by the `buildDir` option.
 
-`serve`
-
-Start a static HTTP server and serve the `buildDir` on the specified `port`.
-
 `deploy`
 
 After a build is complete, move certain files (based on provided glob patterns) to another location.
 
+`serve`
+
+Start a static HTTP server and serve the `buildDir` on the specified `port`.
+
 ## Options
 
-`buildDir`
+`buildDir` - default:  `"./dist"`
 
-The root directory of the generated assets, and the root directory of the static HTTP server. (default: "./dist")
-
-`port`
-
-The port on which to to serve the static HTTP server. (default: 9001)
+The root directory of the generated assets, and the root directory of the static HTTP server.
 
 `deploy`
 
@@ -90,6 +99,10 @@ A configuration option consisting of two properties:
 
 - `destinationPath` - the path to the backend solution relative to your project root
 - `sources` - an array of objects, each consisting of a `source` (glob pattern) and `destination` (directory joined onto the end of `destinationPath`)
+
+`port` - default: `9001`
+
+The port on which to to serve the static HTTP server.
 
 ## Utility functions
 
@@ -115,13 +128,11 @@ Some recommended configuration is included that doesn't usually change between p
 ```js
 function sass() {
   return gulp.src(`./src/css/main.scss`)
-    // Config object exported from /configs/plumber/sass.js
     .pipe($.plumber(registry.config.plumber.sass))
-    // Config function exported from /configs/postcss.js
     .pipe($.postcss(registry.config.postcss(minify, {
       autoprefixer: { grid: "no-autoplace" }
     })))
-    .pipe(gulp.dest(`./dist/css`))
+    .pipe(gulp.dest(path.join(registry.config.buildDir, `css`)))
 }
 ```
 
