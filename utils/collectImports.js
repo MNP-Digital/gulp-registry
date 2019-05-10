@@ -23,7 +23,7 @@ module.exports = function(o) {
           `${o.format}\n`,
           path.posix.join(
             path.posix.relative(path.dirname(o.target), slash(o.sourceDir)),
-            file.replace(ext, "")
+            slash(file.replace(ext, ""))
           )
         )
       );
