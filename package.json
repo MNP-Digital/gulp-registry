@@ -2,7 +2,14 @@
   "name": "@mnpdigital/gulp-registry",
   "version": "0.0.1",
   "description": "Registry of common Gulp tasks used in Front End projects at MNP Digital.",
-  "keywords": ["gulp", "registry", "mnp","digital","t4g"],
+  "keywords": [
+    "gulp",
+    "registry",
+    "mnp",
+    "digital",
+    "t4g"
+  ],
+  "readme" : "https://github.com/MNP-Digital/gulp-registry#readme" ,
   "bugs": {
     "url": "https://github.com/MNP-Digital/gulp-registry/issues"
   },
@@ -12,9 +19,13 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MNP-Digital/gulp-registry",
-    "directory" : "https://github.com/MNP-Digital/gulp-registry"
+    "url": "git+https://github.com/MNP-Digital/gulp-registry.git",
+    "directory": "https://github.com/MNP-Digital/gulp-registry"
   },
+  "contributors": [
+    "Jon Clark",
+    "Karmit Patel <karmit.patel@mnp.ca> (https://www.karmitp.com)"
+  ],
   "dependencies": {
     "autoprefixer": "^9.3.1",
     "chalk": "^2.4.1",
@@ -35,5 +46,9 @@
     "stylelint-config-recommended": "^2.1.0",
     "undertaker-registry": "^1.0.1",
     "util": "^0.11.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
