@@ -21,6 +21,20 @@ From the [official Gulp docs](https://github.com/gulpjs/gulp/blob/master/docs/ap
 
 You can [read more about Custom Registries](https://github.com/gulpjs/undertaker-registry#custom-registries) in the docs for `undertaker-registry`, the default registry that Gulp 4 uses internally.
 
+<!-- TOC -->
+* [MNP Digital - Gulp Task Registry](#mnp-digital---gulp-task-registry)
+  * [What does this do?](#what-does-this-do)
+  * [Example usage](#example-usage)
+  * [Tasks](#tasks)
+  * [Options](#options)
+  * [Utility functions](#utility-functions)
+  * [Configuration objects](#configuration-objects)
+    * [PostCSS configuration](#postcss-configuration)
+  * [Code of Conduct](#code-of-conduct)
+  * [License](#license)
+<!-- TOC -->
+
+
 ## Example usage
 
 ```js
@@ -163,3 +177,5 @@ Please note that this project is released with a [Contributor Code of Conduct][c
 This project is available under the MIT license. See the [LICENSE] file for more info.
 
 [license]: https://github.com/MNP-Digital/gulp-registry/blob/master/LICENSE.md
+
+**Note:** This project is a fork of [@t4gltd/gulp=registry](https://github.com/T4GLTD/gulp-registry)!
