@@ -1,20 +1,19 @@
 {
-  "name": "@t4gltd/gulp-registry",
-  "version": "0.7.2",
-  "description": "Registry of common Gulp tasks used in Front End projects at T4G.",
-  "keywords": [
-    "gulp"
-  ],
+  "name": "@mnpdigital/gulp-registry",
+  "version": "0.0.1",
+  "description": "Registry of common Gulp tasks used in Front End projects at MNP Digital.",
+  "keywords": ["gulp", "registry", "mnp","digital","t4g"],
   "bugs": {
-    "url": "https://github.com/T4GLTD/gulp-registry/issues"
+    "url": "https://github.com/MNP-Digital/gulp-registry/issues"
   },
-  "homepage": "https://github.com/T4GLTD/gulp-registry#readme",
+  "homepage": "https://github.com/MNP-Digital/gulp-registry#readme",
   "license": "MIT",
-  "author": "T4G",
+  "author": "MNP-Digital",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/T4GLTD/gulp-registry"
+    "url": "https://github.com/MNP-Digital/gulp-registry",
+    "directory" : "https://github.com/MNP-Digital/gulp-registry"
   },
   "dependencies": {
     "autoprefixer": "^9.3.1",

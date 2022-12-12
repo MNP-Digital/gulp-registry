@@ -1,21 +1,19 @@
-# T4G - Gulp Task Registry
+# MNP Digital - Gulp Task Registry
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/@t4gltd/gulp-registry">
-    <img alt="npm version" src="https://img.shields.io/npm/v/@t4gltd/gulp-registry.svg?style=flat-square">
+  <a href="https://www.npmjs.com/package/@mnpdigital/gulp-registry">
+   <img alt="npm" src="https://img.shields.io/npm/v/@mnpdigital/gulp-registry?color=green&label=Npm%20version&style=for-the-badge">
   </a>
-  <a href="https://david-dm.org/t4gltd/gulp-registry">
-    <img alt="npm version" src="https://img.shields.io/david/dev/t4gltd/gulp-registry.svg?style=flat-square">
+  <a href="https://github.com/MNP-Digital/gulp-registry/blob/master/LICENSE.md">
+    <img alt="NPM" src="https://img.shields.io/npm/l/@mnpdigital/gulp-registry?color=gree&style=for-the-badge">
   </a>
-  <a href="https://github.com/prettier/prettier">
-    <img alt="code style: prettier" src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square">
-  </a>
-  <a href="https://twitter.com/T4G">
-    <img alt="Follow+T4G+on+Twitter" src="https://img.shields.io/twitter/follow/t4g.svg?label=follow+T4G&style=flat-square">
+  <a href="https://twitter.com/MNP_LLP">
+    <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/MNP_LLP?color=%2300acee&style=for-the-badge">
   </a>
 </p>
 
-We use this custom Gulp registry for some of our front-end development efforts at [T4G](https://www.t4g.com).
+
+We use this custom Gulp registry for some of our front-end development efforts at [MNP Digital](https://mnpdigital.ca/).
 
 ## What does this do?
 
@@ -50,7 +48,7 @@ let config = {
 };
 
 // Import your registry prototype
-const taskReg = require("@t4gltd/gulp-registry");
+const taskReg = require("@mnpdigital/gulp-registry");
 // Create an instance of your registry
 const registry = new taskReg(config);
 // Attach your custom registry to the current `gulp` instance
@@ -102,11 +100,11 @@ A configuration option consisting of two properties:
 
 `port` - default: `9001`
 
-The port on which to to serve the static HTTP server.
+The port on which to serve the static HTTP server.
 
 ## Utility functions
 
-Some useful utility functions are availble on the `utils` property of the registry prototype.
+Some useful utility functions are available on the `utils` property of the registry prototype.
 
 `collectImports({ target, sourceDir, format, [filterFn] })`
 
@@ -158,10 +156,10 @@ In the `sass` gulp task above, we are passing a `{ grid: "no-autoplace" }` optio
 
 Please note that this project is released with a [Contributor Code of Conduct][cc]. By participating in this project you agree to abide by its terms.
 
-[cc]: https://github.com/T4GLTD/gulp-registry/blob/master/CODE_OF_CONDUCT.md
+[cc]: https://github.com/MNP-Digital/gulp-registry/blob/master/CODE_OF_CONDUCT.md
 
 ## License
 
 This project is available under the MIT license. See the [LICENSE] file for more info.
 
-[license]: https://github.com/T4GLTD/gulp-registry/blob/master/LICENSE.md
+[license]: https://github.com/MNP-Digital/gulp-registry/blob/master/LICENSE.md
