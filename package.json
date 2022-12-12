@@ -1,6 +1,6 @@
 {
   "name": "@mnpdigital/gulp-registry",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Registry of common Gulp tasks used in Front End projects at MNP Digital.",
   "keywords": [
     "gulp",
